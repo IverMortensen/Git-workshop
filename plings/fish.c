@@ -1,42 +1,67 @@
 #include "pling.h"
 
+/* 1 = høyre, -1 = venstre */
+static int fish_direction = 1;
+
 void fish_init(unsigned int id)
 {
     (void)id;
+    fish_direction = 1;
 }
 
+<<<<<<< Updated upstream
 enum PATCHLING_ACTION fish_update(unsigned int id,unsigned int boardstate[]){
     static int direction = 1;
+=======
+enum PATCHLING_ACTION fish_update(unsigned int id, unsigned int boardstate[])
+{
+>>>>>>> Stashed changes
     unsigned int i;
+    unsigned int column;
 
-    for (i = 56; i < 64; i++)
+    /* Finn fisken på brettet (8 x 8 ruter). */
+    for (i = 0; i < 64; i++)
     {
         if (boardstate[i] == id)
         {
-            if (i == 63)
+            column = i % 8;
+
+            if (column == 7)
             {
-                direction = -1;
+                fish_direction = -1;
             }
-            else if (i == 56)
+            else if (column == 0)
             {
-                direction = 1;
+                fish_direction = 1;
             }
 
-            if (direction == 1)
+            /* Angrip andre patchlings foran fisken. */
+            if (fish_direction == 1 && column < 7)
             {
+                if (boardstate[i + 1] != 0)
+                {
+                    return PATCHLING_ACTION_ATTACK_RIGHT;
+                }
                 return PATCHLING_ACTION_MOVE_RIGHT;
             }
-            else
+
+            if (fish_direction == -1 && column > 0)
             {
+                if (boardstate[i - 1] != 0)
+                {
+                    return PATCHLING_ACTION_ATTACK_LEFT;
+                }
                 return PATCHLING_ACTION_MOVE_LEFT;
             }
+
+            return PATCHLING_ACTION_NONE;
         }
     }
 
     return PATCHLING_ACTION_NONE;
 }
 
-struct patchling *fish_create()
+struct patchling *fish_create(void)
 {
     struct patchling *p;
 
