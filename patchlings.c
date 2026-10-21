@@ -1,8 +1,11 @@
 #include "plings/pling.h"
 #include "plings/flower.h"
 #include "plings/bee.h"
-
+#include "plings/cloud.h"
+#include "plings/iver.h"
+#include "plings/fish.h"
 #include "plings/nuke.h"
+
 
 /* PREMAKE TEXTURES  -------------------------------------------------------- */
 
@@ -56,6 +59,7 @@ SDL_Texture *premake_checkerboard(SDL_Renderer *renderer)
 
     SDL_Color white = {255, 255, 255, 255};
     SDL_Color red = {255, 0, 0, 255};
+    ;
 
     s = SDL_CreateSurface(256, 256, SDL_PIXELFORMAT_ARGB32);
 
@@ -160,6 +164,7 @@ int main(int argc, char *argv[])
         SDL_srand(0xCAFEBABE); /* every good story ... */
 
         SDL_Init(SDL_INIT_VIDEO);
+        TTF_Init();
 
         SDL_memset(title_buffer, 0, 1024);
         SDL_snprintf(title_buffer, 1024, "Patchlings");
@@ -190,7 +195,7 @@ int main(int argc, char *argv[])
         flower_create();
         bee_create();
         cloud_create();
-        iver_create();
+/*        iver_create(); */
         fish_create();
 
         patchling_list_reset();
