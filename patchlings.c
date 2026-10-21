@@ -4,6 +4,7 @@
 #include "plings/cloud.h"
 #include "plings/iver.h"
 #include "plings/fish.h"
+#include "plings/nuke.h"
 
 
 /* PREMAKE TEXTURES  -------------------------------------------------------- */
@@ -58,6 +59,7 @@ SDL_Texture *premake_checkerboard(SDL_Renderer *renderer)
 
     SDL_Color white = {255, 255, 255, 255};
     SDL_Color red = {255, 0, 0, 255};
+    ;
 
     s = SDL_CreateSurface(256, 256, SDL_PIXELFORMAT_ARGB32);
 
@@ -193,7 +195,7 @@ int main(int argc, char *argv[])
         flower_create();
         bee_create();
         cloud_create();
-        iver_create();
+/*        iver_create(); */
         fish_create();
 
         patchling_list_reset();
@@ -411,6 +413,16 @@ int main(int argc, char *argv[])
 
                     case PATCHLING_ACTION_NONE:
                         break;
+                    case NUKE:
+                        for (i = 0; i < 64; i++)
+                        {
+                            if (boardstate[i] == p->id)
+                            {
+                                break;
+                            }
+                            destroy_patchling(boardstate[i]);
+                            boardstate[i] = 0;
+                        }
                     default:
                         break;
                     }
