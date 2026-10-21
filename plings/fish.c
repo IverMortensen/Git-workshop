@@ -9,13 +9,8 @@ void fish_init(unsigned int id)
     fish_direction = 1;
 }
 
-<<<<<<< Updated upstream
-enum PATCHLING_ACTION fish_update(unsigned int id,unsigned int boardstate[]){
-    static int direction = 1;
-=======
 enum PATCHLING_ACTION fish_update(unsigned int id, unsigned int boardstate[])
 {
->>>>>>> Stashed changes
     unsigned int i;
     unsigned int column;
 
