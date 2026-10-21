@@ -58,7 +58,6 @@ SDL_Texture *premake_checkerboard(SDL_Renderer *renderer)
 
     SDL_Color white = {255, 255, 255, 255};
     SDL_Color red = {255, 0, 0, 255};
-    ;
 
     s = SDL_CreateSurface(256, 256, SDL_PIXELFORMAT_ARGB32);
 
@@ -194,7 +193,7 @@ int main(int argc, char *argv[])
         flower_create();
         bee_create();
         cloud_create();
-/*        iver_create(); */
+        iver_create();
         fish_create();
 
         patchling_list_reset();
