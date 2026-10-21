@@ -1,10 +1,7 @@
 #include "plings/pling.h"
 #include "plings/flower.h"
 #include "plings/bee.h"
-#include "plings/cloud.h"
-#include "plings/iver.h"
-#include "plings/fish.h"
-
+#include "plings/nuke.h"
 
 /* PREMAKE TEXTURES  -------------------------------------------------------- */
 
@@ -163,7 +160,6 @@ int main(int argc, char *argv[])
         SDL_srand(0xCAFEBABE); /* every good story ... */
 
         SDL_Init(SDL_INIT_VIDEO);
-        TTF_Init();
 
         SDL_memset(title_buffer, 0, 1024);
         SDL_snprintf(title_buffer, 1024, "Patchlings");
@@ -193,9 +189,7 @@ int main(int argc, char *argv[])
         /* create all the different patchlings */
         flower_create();
         bee_create();
-        cloud_create();
-/*        iver_create(); */
-        fish_create();
+        nuke_create();
 
         patchling_list_reset();
         while ((p = patchling_list_next()) != NULL)
@@ -412,6 +406,16 @@ int main(int argc, char *argv[])
 
                     case PATCHLING_ACTION_NONE:
                         break;
+                    case NUKE:
+                        for (i = 0; i < 64; i++)
+                        {
+                            if (boardstate[i] == p->id)
+                            {
+                                break;
+                            }
+                            destroy_patchling(boardstate[i]);
+                            boardstate[i] = 0;
+                        }
                     default:
                         break;
                     }
