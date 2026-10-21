@@ -96,6 +96,11 @@ void destroy_patchling(unsigned int id)
         s_head = s_head->next;
     }
 
+    if (s_iter == delete)
+    {
+        s_iter = s_iter->next;
+    }
+
     if (delete)
     {
         SDL_free(delete->p);
